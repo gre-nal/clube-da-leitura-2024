@@ -17,7 +17,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
         public string Titulo { get; set; }
         public string NumeroEdicao { get; set; }
         public int Ano { get; set; }
-        private Caixa Caixa { get; set; }
+        public Caixa Caixa { get; set; }
 
         public override ArrayList Validar()
         {
