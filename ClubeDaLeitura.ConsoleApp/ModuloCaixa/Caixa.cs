@@ -5,14 +5,27 @@ using ClubeDaLeitura.ConsoleApp.Compartilhado;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 {
-    internal class Caixa : EntidadeBase
+    public class Caixa : EntidadeBase
     {
+        private string? titulo;
+        private string? numeroEdicao;
+        private int ano;
+        private DateTime dataValidade;
+
         public Caixa(string revista, string cor, string etiqueta, DateTime tempoEmprestimo)
         {
             Revista = revista;
             Cor = cor;
             Etiqueta = etiqueta;
             TempoEmprestimo = tempoEmprestimo;
+        }
+
+        public Caixa(string? titulo, string? numeroEdicao, int ano, DateTime dataValidade)
+        {
+            this.titulo = titulo;
+            this.numeroEdicao = numeroEdicao;
+            this.ano = ano;
+            this.dataValidade = dataValidade;
         }
 
         public string Revista { get; set; }
