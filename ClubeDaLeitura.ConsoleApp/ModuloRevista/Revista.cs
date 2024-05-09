@@ -36,7 +36,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             if (Caixa == null)
                 erros.Add("o campo \"caixa\" é obrigatório");
            
-
             return erros;
         }
     }
