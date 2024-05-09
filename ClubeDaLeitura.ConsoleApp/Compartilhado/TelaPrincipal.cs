@@ -16,6 +16,7 @@
             Console.WriteLine("2 - Cadastro de Caixas");
             Console.WriteLine("3 - Cadastro de Revistas");
             Console.WriteLine("4 - Cadastro de Emprestimos");
+            Console.WriteLine("5 - Cadastro de Reservas");
 
             Console.WriteLine("S - Sair");
 

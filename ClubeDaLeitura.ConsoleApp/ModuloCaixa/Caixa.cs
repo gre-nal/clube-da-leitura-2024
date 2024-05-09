@@ -32,6 +32,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
         public string Cor { get; set; }
         public string Etiqueta { get; set; }
         private DateTime TempoEmprestimo { get; set; }
+        public double Numero { get; set; }
 
         public override ArrayList Validar()
         {
