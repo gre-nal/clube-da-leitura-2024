@@ -57,7 +57,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             Console.Write("Digite a data de validade: ");
             DateTime dataValidade = Convert.ToDateTime(Console.ReadLine());
 
-            Caixa caixa = new Caixa(Titulo, NumeroEdicao, Ano, dataValidade);
+            Reserva caixa = new Reserva(Titulo, NumeroEdicao, Ano, dataValidade);
 
             return caixa;
         }

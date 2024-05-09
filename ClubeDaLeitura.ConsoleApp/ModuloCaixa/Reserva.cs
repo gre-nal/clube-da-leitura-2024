@@ -5,14 +5,14 @@ using ClubeDaLeitura.ConsoleApp.Compartilhado;
 
 namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
 {
-    public class Caixa : EntidadeBase
+    public class Reserva : EntidadeBase
     {
         private string? titulo;
         private string? numeroEdicao;
         private int ano;
         private DateTime dataValidade;
 
-        public Caixa(string revista, string cor, string etiqueta, DateTime tempoEmprestimo)
+        public Reserva(string revista, string cor, string etiqueta, DateTime tempoEmprestimo)
         {
             Revista = revista;
             Cor = cor;
@@ -20,7 +20,7 @@ namespace ControleMedicamentos.ConsoleApp.ModuloMedicamento
             TempoEmprestimo = tempoEmprestimo;
         }
 
-        public Caixa(string? titulo, string? numeroEdicao, int ano, DateTime dataValidade)
+        public Reserva(string? titulo, string? numeroEdicao, int ano, DateTime dataValidade)
         {
             this.titulo = titulo;
             this.numeroEdicao = numeroEdicao;

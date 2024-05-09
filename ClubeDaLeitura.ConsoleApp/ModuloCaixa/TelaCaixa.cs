@@ -28,7 +28,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             EntidadeBase[] CaixasCadastrados = repositorio.SelecionarTodos();
 
-            foreach (Caixa caixa in CaixasCadastrados)
+            foreach (Reserva caixa in CaixasCadastrados)
             {
                 if (caixa == null)
                     continue;
@@ -57,7 +57,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             Console.Write("Digite a data de validade: ");
             DateTime dataValidade = Convert.ToDateTime(Console.ReadLine());
 
-            Caixa caixa = new Caixa(revista, Cor, Etiqueta, dataValidade);
+            Reserva caixa = new Reserva(revista, Cor, Etiqueta, dataValidade);
 
             return caixa;
         }

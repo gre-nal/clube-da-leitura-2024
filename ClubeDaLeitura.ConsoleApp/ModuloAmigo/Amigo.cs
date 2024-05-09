@@ -3,7 +3,7 @@ using ClubeDaLeitura.ConsoleApp.Compartilhado;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 
-internal class Amigo : EntidadeBase
+public class Amigo : EntidadeBase
 {
     public Amigo(string nome, string nomeResponsavel, string telefone, string endereco)
     {
@@ -21,6 +21,8 @@ internal class Amigo : EntidadeBase
     public double Multa { get; set; }
     public bool TemMulta => Multa > 0;
     public bool JaTemEmprestimo { get; set; }
+    public bool JatemReserva { get; set; }
+
 
     public override ArrayList Validar()
     {

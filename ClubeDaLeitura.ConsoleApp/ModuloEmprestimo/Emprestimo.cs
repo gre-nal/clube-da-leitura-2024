@@ -5,7 +5,7 @@ using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
 
-internal class Emprestimo : EntidadeBase
+public class Emprestimo : EntidadeBase
 {
     public Emprestimo(Revista revistaSelecionada, Amigo amigoSelecionado)
     {

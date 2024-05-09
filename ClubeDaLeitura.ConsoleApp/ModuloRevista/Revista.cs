@@ -6,7 +6,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 {
     public class Revista : EntidadeBase
     {
-        public Revista(string titulo, string numeroEdicao, int ano, Caixa caixa)
+        public Revista(string titulo, string numeroEdicao, int ano, Reserva caixa)
         {
             Titulo = titulo;
             NumeroEdicao = numeroEdicao;
@@ -17,7 +17,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
         public string Titulo { get; set; }
         public string NumeroEdicao { get; set; }
         public int Ano { get; set; }
-        public Caixa Caixa { get; set; }
+        public Reserva Caixa { get; set; }
 
         public override ArrayList Validar()
         {
