@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 
-namespace ClubeDaLeitura.ConsoleApp.Compartilhado
-{
-    public abstract class EntidadeBase
-    {
-        public int Id { get; set; }
+namespace ClubeDaLeitura.ConsoleApp.Compartilhado;
 
-        public abstract ArrayList Validar();
-    }
+public abstract class EntidadeBase
+{
+    public int Id { get; set; }
+
+    public abstract ArrayList Validar();
 }

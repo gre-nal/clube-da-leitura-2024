@@ -1,32 +1,31 @@
-﻿namespace ClubeDaLeitura.ConsoleApp.Compartilhado
+﻿namespace ClubeDaLeitura.ConsoleApp.Compartilhado;
+
+internal static class TelaPrincipal
 {
-    internal static class TelaPrincipal
+    public static char ApresentarMenuPrincipal()
     {
-        public static char ApresentarMenuPrincipal()
-        {
-            Console.Clear();
+        Console.Clear();
 
-            Console.WriteLine("----------------------------------------");
-            Console.WriteLine("|       Clube da Leitura               |");
-            Console.WriteLine("----------------------------------------");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("|       Clube da Leitura               |");
+        Console.WriteLine("----------------------------------------");
 
-            Console.WriteLine();
+        Console.WriteLine();
 
-            Console.WriteLine("1 - Cadastro de Amigos");
-            Console.WriteLine("2 - Cadastro de Caixas");
-            Console.WriteLine("3 - Cadastro de Revistas");
-            Console.WriteLine("4 - Cadastro de Emprestimos");
-            Console.WriteLine("5 - Cadastro de Reservas");
+        Console.WriteLine("1 - Cadastro de Amigos");
+        Console.WriteLine("2 - Cadastro de Caixas");
+        Console.WriteLine("3 - Cadastro de Revistas");
+        Console.WriteLine("4 - Cadastro de Emprestimos");
+        Console.WriteLine("5 - Cadastro de Reservas");
 
-            Console.WriteLine("S - Sair");
+        Console.WriteLine("S - Sair");
 
-            Console.WriteLine();
+        Console.WriteLine();
 
-            Console.Write("Escolha uma das opções: ");
+        Console.Write("Escolha uma das opções: ");
 
-            char opcaoEscolhida = Console.ReadLine()[0];
+        var opcaoEscolhida = Console.ReadLine()[0];
 
-            return opcaoEscolhida;
-        }
+        return opcaoEscolhida;
     }
 }

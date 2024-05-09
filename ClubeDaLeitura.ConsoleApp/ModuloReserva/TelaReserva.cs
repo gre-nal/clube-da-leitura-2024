@@ -1,92 +1,96 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
-using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
-using ControleMedicamentos.ConsoleApp.ModuloMedicamento;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
-namespace ClubeDaLeitura.ConsoleApp.ModuloReserva
+namespace ClubeDaLeitura.ConsoleApp.ModuloReserva;
+
+internal class TelaReserva : TelaBase
 {
-    internal class TelaReserva : TelaBase
+    public override void Registrar()
     {
-        public override void Registrar()
+        ApresentarCabecalho();
+
+        Console.WriteLine($"Cadastrando {tipoEntidade}...");
+
+        Console.WriteLine();
+
+        var entidade = (Reserva)ObterRegistro();
+
+        var erros = entidade.Validar();
+
+        if (erros.Count > 0)
+        {
+            ApresentarErros(erros);
+            return;
+        }
+
+        var conseguiuReservar = entidade.StatusReserva();
+
+        if (!conseguiuReservar)
+        {
+            ExibirMensagem("A reserva não foi possível", ConsoleColor.DarkYellow);
+            return;
+        }
+
+        repositorio.Cadastrar(entidade);
+
+        ExibirMensagem($"O {tipoEntidade} foi cadastrado com sucesso!", ConsoleColor.Green);
+    }
+
+    public override void VisualizarRegistros(bool exibirTitulo)
+    {
+        if (exibirTitulo)
         {
             ApresentarCabecalho();
 
-            Console.WriteLine($"Cadastrando {tipoEntidade}...");
-
-            Console.WriteLine();
-
-            var entidade = (Reserva)ObterRegistro();
-
-            var erros = entidade.Validar();
-
-            if (erros.Count > 0)
-            {
-                ApresentarErros(erros);
-                return;
-            }
-
-            var conseguiuReservar = entidade.StatusReserva();
-
-            if (!conseguiuReservar)
-            {
-                ExibirMensagem("A reserva não foi possível", ConsoleColor.DarkYellow);
-                return;
-            }
-
-            repositorio.Cadastrar(entidade);
-
-            ExibirMensagem($"O {tipoEntidade} foi cadastrado com sucesso!", ConsoleColor.Green);
+            Console.WriteLine("Visualizando Reservas...");
         }
-        public override void VisualizarRegistros(bool exibirTitulo)
+
+        Console.WriteLine();
+
+        Console.WriteLine(
+            "{0, -10} | {1, -15} | {2, -10}",
+            "Id", "Revista", "Status"
+        );
+
+        var ReservasCadastrados = repositorio.SelecionarTodos();
+
+        foreach (Reserva reserva in ReservasCadastrados)
         {
-            if (exibirTitulo)
-            {
-                ApresentarCabecalho();
-
-                Console.WriteLine("Visualizando Empréstimos...");
-            }
-
-            Console.WriteLine();
+            if (reserva == null)
+                continue;
 
             Console.WriteLine(
                 "{0, -10} | {1, -15} | {2, -10}",
-                "Id", "Revista", "Status"
+                reserva.Id,
+                reserva.Revista.Titulo,
+                reserva.Validade ? "Válida" : "Expirada"
             );
-
-            var ReservasCadastrados = repositorio.SelecionarTodos();
-
-            foreach (Reserva reserva in ReservasCadastrados)
-            {
-                if (reserva == null)
-                    continue;
-
-                Console.WriteLine(
-                    "{0, -10} | {1, -15} | {2, -10}",
-                    reserva.Id,
-                    reserva.Revista,
-                    reserva.Validade
-                );
-            }
-
-            Console.ReadLine();
-            Console.WriteLine();
-            throw new NotImplementedException();
         }
 
-        protected override EntidadeBase ObterRegistro()
-        {
-            //Console.WriteLine($"A validade é de 2 dias");
+        Console.ReadLine();
+        Console.WriteLine();
+    }
 
-            //Console.Write("Digite a revista: ");
-            //string revista = Console.ReadLine();
+    protected override EntidadeBase ObterRegistro()
+    {
+        Console.WriteLine("A validade é de 2 dias");
 
-            //Console.Write("Digite o amigo: ");
-            //string amigo = Console.ReadLine();
+        Console.Write("Digite a revista: ");
+        var tituloRevista = Console.ReadLine();
 
-            //Reserva reserva = new Reserva(revista, amigo);
-            
-            //return reserva;
+        Console.Write("Digite o amigo: ");
+        var nomeAmigo = Console.ReadLine();
 
-            throw new NotImplementedException();
-        }
+        // Aqui você precisa obter uma instância de Amigo e Revista. 
+        // Como exemplo, estou criando novas instâncias com valores padrão.
+        // Você deve substituir isso pela lógica correta para obter um Amigo e uma Revista.
+        var amigo = new Amigo(nomeAmigo, "Nome do responsável", "Telefone", "Endereço");
+        var revista = new Revista(tituloRevista, "NumeroEdicao", 2022, new Caixa("Etiqueta", "Cor", 7));
+
+        var reserva = new Reserva(amigo, revista);
+
+        return reserva;
     }
 }
