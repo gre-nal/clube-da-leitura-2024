@@ -2,8 +2,8 @@
 
 internal abstract class RepositorioBase
 {
-    protected int contadorId = 1;
-    protected EntidadeBase[] registros = new EntidadeBase[100];
+    private int contadorId = 1;
+    private readonly EntidadeBase[] registros = new EntidadeBase[100];
 
     public void Cadastrar(EntidadeBase novoRegistro)
     {
@@ -46,6 +46,7 @@ internal abstract class RepositorioBase
 
         return false;
     }
+
 
     public EntidadeBase[] SelecionarTodos()
     {

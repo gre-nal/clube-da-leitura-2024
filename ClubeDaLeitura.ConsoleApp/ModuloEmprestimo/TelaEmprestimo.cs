@@ -6,8 +6,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
 
 internal class TelaEmprestimo : TelaBase
 {
-    public RepositorioAmigo? repositorioAmigo = null;
-    public RepositorioRevista? repositorioRevista = null;
+    public RepositorioAmigo repositorioAmigo = null;
+    public RepositorioRevista repositorioRevista = null;
     public TelaAmigo telaAmigo = null;
     public TelaRevista telaRevista = null;
 
@@ -28,6 +28,8 @@ internal class TelaEmprestimo : TelaBase
             ApresentarErros(erros);
             return;
         }
+
+        VerificarEmprestimos();
 
         var conseguiuEmprestar = entidade.EmprestarRevista();
 
@@ -99,5 +101,18 @@ internal class TelaEmprestimo : TelaBase
         var novoEmprestimo = new Emprestimo(revistaSelecionada, amigoSelecionado);
 
         return novoEmprestimo;
+    }
+
+    public void VerificarEmprestimos()
+    {
+        var emprestimosCadastrados = repositorio.SelecionarTodos();
+
+        foreach (Emprestimo emprestimo in emprestimosCadastrados)
+        {
+            if (emprestimo == null)
+                continue;
+
+            emprestimo.VerificarEmprestimo();
+        }
     }
 }

@@ -9,23 +9,17 @@ public class Reserva : EntidadeBase
 {
     public bool Validade;
 
-    public Reserva(bool validade, Revista revista, Amigo amigo, DateTime dataExpiracao)
+    public Reserva(Amigo amigo, Revista revista)
     {
-        Validade = validade;
-        Revista = revista;
         Amigo = amigo;
-        DataExpiracao = dataExpiracao;
-    }
-
-    public Reserva(Amigo validade, Revista revista)
-    {
-        throw new NotImplementedException();
+        Revista = revista;
+        DataExpiracao = DateTime.Now.AddDays(2);
+        Validade = true;
     }
 
     public Revista Revista { get; set; }
     public Amigo Amigo { get; set; }
     public DateTime DataExpiracao { get; set; }
-    public double Numero { get; internal set; }
 
     public override ArrayList Validar()
     {

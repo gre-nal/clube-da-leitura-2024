@@ -1,8 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compartilhado;
 
-namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
+namespace ClubeDaLeitura.ConsoleApp.ModuloRevista;
+
+internal class RepositorioRevista : RepositorioBase
 {
-    internal class RepositorioRevista : RepositorioBase
-    {
-    }
 }

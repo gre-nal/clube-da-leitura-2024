@@ -39,10 +39,13 @@ public class Amigo : EntidadeBase
 
         if (string.IsNullOrEmpty(Endereco))
             erros.Add("O Endereco precisa ser preenchido");
+
         if (JaTemEmprestimo)
             erros.Add("O Amigo já possui um emprestimo em aberto");
+
         if (JatemReserva)
             erros.Add("O Amigo já possui uma reserva em aberto");
+
         if (Multa < 0)
             erros.Add("Multa em aberto");
 
