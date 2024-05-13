@@ -87,9 +87,10 @@ internal class TelaReserva : TelaBase
         // Como exemplo, estou criando novas instâncias com valores padrão.
         // Você deve substituir isso pela lógica correta para obter um Amigo e uma Revista.
         var amigo = new Amigo(nomeAmigo, "Nome do responsável", "Telefone", "Endereço");
-        var revista = new Revista(tituloRevista, "NumeroEdicao", 2022, new Caixa("Etiqueta", "Cor", 7));
+        var caixa = new Caixa("Etiqueta", "Cor", 7);
+        var revista = new Revista(tituloRevista, "NumeroEdicao", 2022, caixa);
 
-        var reserva = new Reserva(amigo, revista);
+        var reserva = new Reserva(revista, amigo);
 
         return reserva;
     }

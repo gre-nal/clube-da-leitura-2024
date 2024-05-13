@@ -3,56 +3,61 @@ using ClubeDaLeitura.ConsoleApp.Compartilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
-namespace ClubeDaLeitura.ConsoleApp.ModuloReserva;
-
-public class Reserva : EntidadeBase
+namespace ClubeDaLeitura.ConsoleApp.ModuloReserva
 {
-    public bool Validade;
-
-    public Reserva(Amigo amigo, Revista revista)
+    public class Reserva : EntidadeBase
     {
-        Amigo = amigo;
-        Revista = revista;
-        DataExpiracao = DateTime.Now.AddDays(2);
-        Validade = true;
-    }
+        public Reserva(bool validade, Revista revista, Amigo amigo, DateTime dataExpiracao)
+        {
+            Validade = validade;
+            Revista = revista;
+            Amigo = amigo;
+            DataExpiracao = dataExpiracao;
+        }
 
-    public Revista Revista { get; set; }
-    public Amigo Amigo { get; set; }
-    public DateTime DataExpiracao { get; set; }
+        public Reserva(Revista revista, Amigo amigo)
+        {
+            Revista = revista;
+            Amigo = amigo;
+        }
 
-    public override ArrayList Validar()
-    {
-        var erros = new ArrayList();
+        public bool Validade;
+        public Revista Revista { get; set; }
+        public Amigo Amigo { get; set; }
+        public DateTime DataExpiracao { get; set; }
+        public override ArrayList Validar()
+        {
+            var erros = new ArrayList();
 
-        if (Validade == false)
-            erros.Add("\"Validade\" foi expirada");
+            if (Validade == false)
+                erros.Add("\"Validade\" foi expirada");
 
-        if (Revista == null)
-            erros.Add("O campo \"revista\" precisa ser preenchida");
+            if (Revista == null)
+                erros.Add("O campo \"revista\" precisa ser preenchida");
 
-        if (Amigo == null)
-            erros.Add("O campo \"amigo\" precisa ser informado");
+            if (Amigo == null)
+                erros.Add("O campo \"amigo\" precisa ser informado");
 
-        return erros;
+            return erros;
 
-        throw new NotImplementedException();
-    }
+            throw new NotImplementedException();
+        }
+        public bool ReservarRevista()
+        {
+            if (Amigo.JatemReserva)
+                return false;
 
-    public bool ReservarRevista()
-    {
-        if (Amigo.JatemReserva)
-            return false;
+            Amigo.JatemReserva = true;
+            return true;
+        }
 
-        Amigo.JatemReserva = true;
-        return true;
-    }
+        public bool StatusReserva()
+        {
+            if (DateTime.Now > DataExpiracao)
+                _ = Validade == true;
 
-    public bool StatusReserva()
-    {
-        if (DateTime.Now > DataExpiracao)
-            _ = Validade;
-
-        return Validade;
+            return Validade;
+            
+        }
     }
 }
