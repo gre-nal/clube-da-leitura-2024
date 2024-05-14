@@ -2,7 +2,7 @@
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 
-internal class TelaAmigo : TelaBase
+internal class TelaAmigo : TelaBase<Amigo>, ITelaCadastravel
 {
     public override void VisualizarRegistros(bool exibirTitulo)
     {
@@ -37,7 +37,7 @@ internal class TelaAmigo : TelaBase
         Console.WriteLine();
     }
 
-    protected override EntidadeBase ObterRegistro()
+    protected override Amigo ObterRegistro()
     {
         Console.Write("Digite o nome do Amigo: ");
         var nome = Console.ReadLine();
@@ -54,5 +54,12 @@ internal class TelaAmigo : TelaBase
         var novoAmigo = new Amigo(nome, nomeResponsavel, telefone, endereco);
 
         return novoAmigo;
+    }
+
+    public void CadastrarEntidadeTeste()
+    {
+        Amigo amigo = new Amigo("Matheus", "Gustavo", "49 99999-9999","Rua Jânio Quadros");
+
+        repositorio.Cadastrar(amigo);
     }
 }

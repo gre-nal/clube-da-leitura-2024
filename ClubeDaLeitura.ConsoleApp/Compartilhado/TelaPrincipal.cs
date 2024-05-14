@@ -1,7 +1,23 @@
-﻿namespace ClubeDaLeitura.ConsoleApp.Compartilhado;
+﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
-internal static class TelaPrincipal
+namespace ClubeDaLeitura.ConsoleApp.Compartilhado;
+
+public class TelaPrincipal
 {
+    private RepositorioAmigo repositorioAmigo;
+    private TelaAmigo telaAmigo;
+
+    public TelaPrincipal()
+    {
+        repositorioAmigo = new RepositorioAmigo();
+
+        telaAmigo = new TelaAmigo();
+        telaAmigo.tipoEntidade = "Amigo";
+        telaAmigo.repositorio = repositorioAmigo;
+
+        telaAmigo.CadastrarEntidadeTeste();
+    }
     public static char ApresentarMenuPrincipal()
     {
         Console.Clear();

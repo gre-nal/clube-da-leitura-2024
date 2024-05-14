@@ -1,68 +1,71 @@
-﻿namespace ClubeDaLeitura.ConsoleApp.Compartilhado;
+﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 
-internal abstract class RepositorioBase
+namespace ClubeDaLeitura.ConsoleApp.Compartilhado;
+
+public abstract class RepositorioBase<T> where T : EntidadeBase
 {
-    private int contadorId = 1;
-    private readonly EntidadeBase[] registros = new EntidadeBase[100];
+    protected List<T> registros = new List<T>();
+    protected int contadorId = 1;
 
-    public void Cadastrar(EntidadeBase novoRegistro)
+    public void Cadastrar(T novoRegistro)
     {
         novoRegistro.Id = contadorId++;
 
-        RegistrarItem(novoRegistro);
+        registros.Add(novoRegistro);
     }
 
     public bool Editar(int id, EntidadeBase novaEntidade)
     {
         novaEntidade.Id = id;
 
-        for (var i = 0; i < registros.Length; i++)
-            if (registros[i] == null)
-            {
-            }
+        foreach (T entidade in registros)
+        {
+            if (entidade == null)
+                continue;
 
-            else if (registros[i].Id == id)
+            else if (entidade.Id == id)
             {
-                registros[i] = novaEntidade;
+                entidade.AtualizarRegistro(novaEntidade);
 
                 return true;
             }
+        }
 
         return false;
     }
 
     public bool Excluir(int id)
     {
-        for (var i = 0; i < registros.Length; i++)
-            if (registros[i] == null)
-            {
-            }
+        foreach (T entidade in registros)
+        {
+            if (entidade == null)
+                continue;
 
-            else if (registros[i].Id == id)
+            else if (entidade.Id == id)
             {
-                registros[i] = null;
+                registros.Remove(entidade);
+
                 return true;
             }
+        }
 
         return false;
     }
 
 
-    public EntidadeBase[] SelecionarTodos()
+    public List<T> SelecionarTodos()
     {
         return registros;
     }
 
-    public EntidadeBase SelecionarPorId(int id)
+    public T SelecionarPorId(int id)
     {
-        for (var i = 0; i < registros.Length; i++)
+        foreach (T e in registros)
         {
-            var e = registros[i];
-
             if (e == null)
                 continue;
 
-            if (e.Id == id)
+            else if (e.Id == id)
                 return e;
         }
 
@@ -71,31 +74,34 @@ internal abstract class RepositorioBase
 
     public bool Existe(int id)
     {
-        for (var i = 0; i < registros.Length; i++)
+        foreach (T e in registros)
         {
-            var e = registros[i];
-
             if (e == null)
                 continue;
 
-            if (e.Id == id)
+            else if (e.Id == id)
                 return true;
         }
 
         return false;
     }
 
-    protected void RegistrarItem(EntidadeBase novoRegistro)
+    public static implicit operator RepositorioBase<T>(RepositorioAmigo v)
     {
-        for (var i = 0; i < registros.Length; i++)
-            if (registros[i] != null)
-            {
-            }
-
-            else
-            {
-                registros[i] = novoRegistro;
-                break;
-            }
+        throw new NotImplementedException();
     }
+
+    //protected void RegistrarItem(EntidadeBase novoRegistro)
+    //{
+    //    for (var i = 0; i < registros.Length; i++)
+    //        if (registros[i] != null)
+    //        {
+    //        }
+
+    //        else
+    //        {
+    //            registros[i] = novoRegistro;
+    //            break;
+    //        }
+    //}
 }

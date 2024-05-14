@@ -25,6 +25,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReserva
         public Revista Revista { get; set; }
         public Amigo Amigo { get; set; }
         public DateTime DataExpiracao { get; set; }
+        public bool Expirada { get; internal set; }
+
         public override ArrayList Validar()
         {
             var erros = new ArrayList();

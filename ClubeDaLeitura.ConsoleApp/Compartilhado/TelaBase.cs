@@ -2,12 +2,12 @@
 
 namespace ClubeDaLeitura.ConsoleApp.Compartilhado;
 
-internal abstract class TelaBase
+public abstract class TelaBase<T> where T : EntidadeBase
 {
-    public RepositorioBase repositorio = null;
     public string tipoEntidade = "";
+    public RepositorioBase<T> repositorio = null;
 
-    public char ApresentarMenu()
+    public virtual char ApresentarMenu()
     {
         Console.Clear();
 
@@ -30,6 +30,20 @@ internal abstract class TelaBase
         var operacaoEscolhida = Convert.ToChar(Console.ReadLine());
 
         return operacaoEscolhida;
+    }
+    protected void InserirRegistro(T entidade)
+    {
+        ArrayList erros = entidade.Validar();
+
+        if (erros.Count > 0)
+        {
+            ApresentarErros(erros);
+            return;
+        }
+
+        repositorio.Cadastrar(entidade);
+
+        ExibirMensagem($"O {tipoEntidade} foi cadastrado com sucesso!", ConsoleColor.Green);
     }
 
     public virtual void Registrar()
@@ -170,5 +184,5 @@ internal abstract class TelaBase
         Console.ReadLine();
     }
 
-    protected abstract EntidadeBase ObterRegistro();
+    protected abstract T ObterRegistro();
 }

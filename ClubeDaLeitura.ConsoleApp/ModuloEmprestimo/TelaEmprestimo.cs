@@ -4,13 +4,36 @@ using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
 
-internal class TelaEmprestimo : TelaBase
+public class TelaEmprestimo : TelaBase, ITelaCadastravel
 {
-    public RepositorioAmigo repositorioAmigo = null;
-    public RepositorioRevista repositorioRevista = null;
     public TelaAmigo telaAmigo = null;
+    public RepositorioAmigo repositorioAmigo = null;
     public TelaRevista telaRevista = null;
+    public RepositorioRevista repositorioRevista = null;
 
+    public override char ApresentarMenu()
+    {
+        Console.Clear();
+
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine($"        Gestão de {tipoEntidade}s        ");
+        Console.WriteLine("----------------------------------------");
+
+        Console.WriteLine();
+
+        Console.WriteLine("1 - Cadastro de Novo Empréstimo");
+        Console.WriteLine("2 - Conclusão de Empréstimo");
+        Console.WriteLine("3 - Visualizar Empréstimos");
+
+        Console.WriteLine("S - Voltar");
+
+        Console.WriteLine();
+
+        Console.Write("Escolha uma das opções: ");
+        char operacaoEscolhida = Convert.ToChar(Console.ReadLine());
+
+        return operacaoEscolhida;
+    }
     public override void Registrar()
     {
         ApresentarCabecalho();
